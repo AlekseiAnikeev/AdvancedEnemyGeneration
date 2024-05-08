@@ -1,11 +1,11 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Spawner
 {
     public class Target : MonoBehaviour
     {
-        public UnityEvent<Entity.Enemy> Hit;
+        public event Action<Entity.Enemy> Hit;
 
         private void OnTriggerEnter(Collider other)
         {

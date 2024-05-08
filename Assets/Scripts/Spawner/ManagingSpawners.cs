@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,15 +11,20 @@ namespace Spawner
 
         private void Start()
         {
-            InvokeRepeating(nameof(ActivateRandomSpawner), 0f, _repeatRate);
+            StartCoroutine(nameof(ActivateRandomSpawner));
         }
 
-        private void ActivateRandomSpawner()
+        private IEnumerator ActivateRandomSpawner()
         {
             var minValue = 0;
             var maxValue = _spawners.Count;
 
-            _spawners[Random.Range(minValue, maxValue)].Spawn();
+            while (enabled)
+            {
+                yield return new WaitForSecondsRealtime(_repeatRate);
+                
+                _spawners[Random.Range(minValue, maxValue)].Spawn();
+            }
         }
     }
 }

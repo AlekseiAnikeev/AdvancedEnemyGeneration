@@ -26,18 +26,18 @@ namespace Spawner
             );
 
             _spawnPoint = transform.GetChild(0).GetComponent<SpawnPoint>();
-            
+
             _target = transform.GetChild(1).GetComponent<Target>();
         }
 
         private void OnEnable()
         {
-            _target.Hit.AddListener(OnRelease);
+            _target.Hit += OnRelease;
         }
 
         private void OnDisable()
         {
-            _target.Hit.RemoveListener(OnRelease);
+            _target.Hit -= OnRelease;
         }
 
         private void OnRelease(Entity.Enemy enemy)
